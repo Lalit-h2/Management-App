@@ -159,3 +159,70 @@ exports.getUsersByRole = async (req, res) => {
     })
   }
 }
+
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const result = await User.findByIdAndDelete(id)
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    })
+  } catch (error) {
+    console.error("Error deleting user:", error)
+    return res.status(500).json({
+      success: false,
+      message: "Server error while deleting user",
+    })
+  }
+}
+
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { name, email, password, address, mobileNo } = req.body
+
+    const user = await User.findById(id)
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      })
+    }
+
+
+    user.name = name || user.name
+    user.email = email || user.email
+    // user.className = className || user.className
+    user.address = address || user.address
+    user.mobileNo = mobileNo || user.mobileNo
+
+    if (password && password.trim() !== "") {
+      const salt = await bcrypt.genSalt(10)
+      user.password = await bcrypt.hash(password, salt)
+    }
+
+    await user.save()
+
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+    })
+  } catch (error) {
+    console.error("Error updating user:", error)
+    return res.status(500).json({
+      success: false,
+      message: "Server error while updating user",
+    })
+  }
+}
