@@ -6,7 +6,7 @@ export const Logout = () => {
 
   const handleLogout = () => {
     console.log("Logged out");
-    navigate('/login');
+    navigate('/');
     localStorage.clear();
   };
 

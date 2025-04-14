@@ -5,16 +5,16 @@ const ResponsiveSidebar = () => {
   const links = [
     { title: "Profile", link: "/layout", emoji: "👤" },
     { title: "Assignments", link: "/layout/assignment", emoji: "📅" },
-    { title: "Edit Profile", link: "/layout/edit-profile", emoji: "✏️" },
     { title: "Change Password", link: "/layout/change-pass", emoji: "🔑" },
     { title: "Notification", link: "/layout/notifications", emoji: "🔔" },
     { title: "AI Friend", link: "/layout/friend", emoji: "🤖" },
+    { title: "Hostel", link: "/layout/hostel-dashboard", emoji: "🏠" }   ,
     { title: "Result", link: "/layout/result", emoji: "📊" },
+    { title: "Logout", link: "/layout/logout", emoji: "🚪" },
     { title: "Attendance", link: "/layout/attendance", emoji: "📋" },
+    { title: "Edit Profile", link: "/layout/edit-profile", emoji: "✏️" },
     { title: "Block User", link: "/layout/block", emoji: "🚫" },
     { title: "Help Messages", link: "/layout/help", emoji: "💬" },
-    { title: "Logout", link: "/layout/logout", emoji: "🚪" },
-    { title: "Delete Profile", link: "/layout/delete", emoji: "🗑️" },
   ];
 
   const username = localStorage.getItem("userName")
@@ -23,16 +23,16 @@ const ResponsiveSidebar = () => {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   if (role === "Student") {
-    links.splice(7, 3);
+    links.splice(8, 4);
   }
 
   if (role === "Teacher") {
     links.splice(8, 1);
   }
   return (
-    <div className="flex">
+    <div className="flex ">
       <div
-        className={`fixed rounded text-center md:top-[8vh] top-0 left-0 h-full z-40 bg-gradient-to-b from-[#4388D3] to-[#FF9DDA] transition-transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed mt-3 rounded text-center md:top-[8vh] top-0 left-0 h-full z-40 bg-gradient-to-b from-[#4388D3] to-[#FF9DDA] transition-transform ${isOpen ? "translate-x-0" : "-translate-x-full"
           } w-[200px] md:translate-x-0 md:w-1/6`}
       >
         <button
@@ -49,7 +49,7 @@ const ResponsiveSidebar = () => {
               <li key={i}>
                 <Link
                   to={item.link}
-                  className="flex items-center justify-center p-2 font-semibold md:text-xl md:font-semibold text-white hover:bg-gray-700 rounded-lg"
+                  className="flex items-center justify-start p-2 font-semibold md:text-xl md:font-semibold text-white hover:bg-gray-700 rounded-lg"
                 >
                   <span className="mr-2">{item.emoji}</span>
                   {item.title}
