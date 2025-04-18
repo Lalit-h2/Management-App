@@ -7,7 +7,9 @@ helpMsgRouter.post('/send-msg', async (req, res) => {
   try {
     const { message } = req.body;
 
-    if (!message || typeof message !== 'string' || message.trim().length === 0) {
+    console.log(message,(typeof message),"done")
+    if (!message || typeof message != 'string' || message.trim().length === 0) {
+      console.log("here")
       return res.status(400).json({ error: 'Message is required and must be a non-empty string.' });
     }
 

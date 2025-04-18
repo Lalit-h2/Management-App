@@ -6,9 +6,9 @@ const resultRouter = express.Router();
 
 resultRouter.post('/post-result', authentication, async (req, res) => {
   try {
-    const { studentId, Bengali, English, Mathematics, History, Geography, Physics, Biology } = req.body;
+    const { studentId, Marathi, English, Mathematics, History, Geography, Physics, Biology } = req.body;
 
-    if (!studentId || Bengali == null || English == null || Mathematics == null ||
+    if (!studentId || Marathi == null || English == null || Mathematics == null ||
       History == null || Geography == null || Physics == null || Biology == null) {
       return res.status(400).json({ message: "Missing required fields." });
     }
@@ -21,11 +21,11 @@ resultRouter.post('/post-result', authentication, async (req, res) => {
     const classId = studentDetails.className;
 
 
-    const total = Number(Bengali) + Number(English) + Number(Mathematics) + Number(History) + Number(Geography) + Number(Physics) + Number(Biology);
+    const total = Number(Marathi) + Number(English) + Number(Mathematics) + Number(History) + Number(Geography) + Number(Physics) + Number(Biology);
 
     const newResult = new Result({
       className: classId,
-      bengali: Bengali,
+      Marathi: Marathi,
       english: English,
       mathematics: Mathematics,
       history: History,
@@ -67,23 +67,23 @@ resultRouter.get('/get-result', authentication, async (req, res) => {
 
 // resultRouter.put('/update-result', authentication, async (req, res) => {
 //   try {
-//     const { resultId, Bengali, English, Mathematics, History, Geography, Physics, Biology } = req.body;
+//     const { resultId, Marathi, English, Mathematics, History, Geography, Physics, Biology } = req.body;
 
 //     // Validate input
-//     if (!resultId || Bengali == null || English == null || Mathematics == null ||
+//     if (!resultId || Marathi == null || English == null || Mathematics == null ||
 //       History == null || Geography == null || Physics == null || Biology == null) {
 //       return res.status(400).json({ message: "Missing required fields." });
 //     }
 
 //     // Calculate the total marks
-//     const total = Number(Bengali) + Number(English) + Number(Mathematics) +
+//     const total = Number(Marathi) + Number(English) + Number(Mathematics) +
 //       Number(History) + Number(Geography) + Number(Physics) + Number(Biology);
 
 //     // Find and update the result
 //     const updatedResult = await Result.findByIdAndUpdate(
 //       resultId,
 //       {
-//         bengali: Bengali,
+//         Marathi: Marathi,
 //         english: English,
 //         mathematics: Mathematics,
 //         history: History,

@@ -6,7 +6,7 @@ const AddResult = () => {
   const [results, setResults] = useState([]);
 
   const tableHeadings = [
-    "Bengali",
+    "Marathi",
     "English",
     "Mathematics",
     "History",
@@ -35,7 +35,7 @@ const AddResult = () => {
 
   const [formData, setFormData] = useState({
     studentId: "",
-    Bengali: "",
+    Marathi: "",
     English: "",
     Mathematics: "",
     History: "",
@@ -61,7 +61,7 @@ const AddResult = () => {
 
       setFormData({
         studentId: "",
-        Bengali: "",
+        Marathi: "",
         English: "",
         Mathematics: "",
         History: "",
@@ -106,7 +106,7 @@ const AddResult = () => {
               </div>
 
               {[
-                "Bengali",
+                "Marathi",
                 "English",
                 "Mathematics",
                 "History",

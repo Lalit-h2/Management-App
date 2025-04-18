@@ -6,7 +6,7 @@ const resultSchema = new mongoose.Schema({
     ref: "Class",
     required: true,
   },
-  bengali: {
+  Marathi: {
     type: Number,
     required: true,
     min: 0,

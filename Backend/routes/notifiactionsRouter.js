@@ -5,13 +5,13 @@ const notificrouter = express.Router();
 
 notificrouter.post('/give-new-notification', authentication, async (req, res) => {
   try {
-    const { title, desc } = req.body;
-
-    if (!title || !desc) {
+    const { title,  description } = req.body;
+    
+    if (!title || !description) {
       return res.status(400).json({ message: "Title and description are required." });
     }
 
-    const newNotification = new Notifications({ title, desc });
+    const newNotification = new Notifications({ title, desc: description });
     await newNotification.save();
 
     return res.status(200).json({ message: "Notification successfully posted." });

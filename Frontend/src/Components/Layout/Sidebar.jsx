@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaUserAlt, FaClipboardList, FaLock, FaBell, FaRobot, FaHome, FaChartBar, FaSignOutAlt, FaClipboard, FaPen, FaComments } from 'react-icons/fa';
 
 const ResponsiveSidebar = () => {
   const links = [
-    { title: "Profile", link: "/layout", emoji: "👤" },
-    { title: "Assignments", link: "/layout/assignment", emoji: "📅" },
-    { title: "Change Password", link: "/layout/change-pass", emoji: "🔑" },
-    { title: "Notification", link: "/layout/notifications", emoji: "🔔" },
-    { title: "AI Friend", link: "/layout/friend", emoji: "🤖" },
-    { title: "Hostel", link: "/layout/hostel-dashboard", emoji: "🏠" }   ,
-    { title: "Result", link: "/layout/result", emoji: "📊" },
-    { title: "Logout", link: "/layout/logout", emoji: "🚪" },
-    { title: "Attendance", link: "/layout/attendance", emoji: "📋" },
-    { title: "Edit Profile", link: "/layout/edit-profile", emoji: "✏️" },
-    { title: "Block User", link: "/layout/block", emoji: "🚫" },
-    { title: "Help Messages", link: "/layout/help", emoji: "💬" },
+    { title: "Profile", link: "/layout", icon: <FaUserAlt className="h-6 w-6" /> },
+    { title: "Assignments", link: "/layout/assignment", icon: <FaClipboardList className="h-6 w-6" /> },
+    { title: "Change Password", link: "/layout/change-pass", icon: <FaLock className="h-6 w-6" /> },
+    { title: "Notification", link: "/layout/notifications", icon: <FaBell className="h-6 w-6" /> },
+    { title: "AI Friend", link: "/layout/friend", icon: <FaRobot className="h-6 w-6" /> },
+    { title: "Hostel", link: "/layout/hostel-dashboard", icon: <FaHome className="h-6 w-6" /> },
+    { title: "Result", link: "/layout/result", icon: <FaChartBar className="h-6 w-6" /> },
+    { title: "Logout", link: "/layout/logout", icon: <FaSignOutAlt className="h-6 w-6" /> },
+    { title: "Attendance", link: "/layout/attendance", icon: <FaClipboard className="h-6 w-6" /> },
+    { title: "Edit Profile", link: "/layout/edit-profile", icon: <FaPen className="h-6 w-6" /> },
+    { title: "Help Messages", link: "/layout/help", icon: <FaComments className="h-6 w-6" /> },
   ];
 
-  const username = localStorage.getItem("userName")
+  const username = localStorage.getItem("userName");
   const [isOpen, setIsOpen] = useState(false);
   const role = localStorage.getItem("role");
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -29,8 +29,9 @@ const ResponsiveSidebar = () => {
   if (role === "Teacher") {
     links.splice(8, 1);
   }
+
   return (
-    <div className="flex ">
+    <div className="flex">
       <div
         className={`fixed mt-3 rounded text-center md:top-[8vh] top-0 left-0 h-full z-40 bg-gradient-to-b from-[#4388D3] to-[#FF9DDA] transition-transform ${isOpen ? "translate-x-0" : "-translate-x-full"
           } w-[200px] md:translate-x-0 md:w-1/6`}
@@ -51,7 +52,7 @@ const ResponsiveSidebar = () => {
                   to={item.link}
                   className="flex items-center justify-start p-2 font-semibold md:text-xl md:font-semibold text-white hover:bg-gray-700 rounded-lg"
                 >
-                  <span className="mr-2">{item.emoji}</span>
+                  <span className="mr-2">{item.icon}</span>
                   {item.title}
                 </Link>
               </li>

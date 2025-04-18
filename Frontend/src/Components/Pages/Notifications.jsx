@@ -28,6 +28,7 @@ export const Notifications = () => {
     e.preventDefault();
 
     try {
+      console.log(formValues)
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_BASEURL}/api/give-new-notification`,
         formValues,
@@ -58,7 +59,8 @@ export const Notifications = () => {
       {role !== "Student" ? (
         <div>
           {!ShowNotifications ? <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
-            <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
+            <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full relative">
+              <span className="absolute top-0 right-0 p-4 text-3xl text-blue-800 cursor-pointer font-mono" onClick={()=>setShowNotifications(true)} >x</span>
               <h1 className="text-2xl font-bold text-blue-700 mb-6">Create Notification</h1>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -94,7 +96,7 @@ export const Notifications = () => {
                 <button
                   type="submit"
                   className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onClick={() => setShowNotifications(true)}
+                  onClick={() => { }}
                 >
                   Create Notification
                 </button>

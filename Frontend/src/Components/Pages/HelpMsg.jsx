@@ -28,6 +28,7 @@ export const HelpMsg = ({ setIsHome }) => {
       toast.error('An error occurred. Please try again.');
     } finally {
       setLoading(false);
+      setIsHome(true)
     }
   };
 
@@ -49,7 +50,7 @@ export const HelpMsg = ({ setIsHome }) => {
               type="submit"
               className="flex items-center justify-center w-full p-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
               disabled={loading}
-              onClick={() => setIsHome(true)}
+              
             >
               {loading ? (
                 <span className="loader inline-block w-4 h-4 border-2 border-t-2 border-white border-t-transparent rounded-full animate-spin"></span>
