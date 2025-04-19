@@ -4,18 +4,17 @@ import { FaUserAlt, FaClipboardList, FaLock, FaBell, FaRobot, FaHome, FaChartBar
 
 const ResponsiveSidebar = () => {
   const links = [
-    { title: "Profile", link: "/layout", icon: <FaUserAlt className="h-6 w-6" /> },
-    { title: "Assignments", link: "/layout/assignment", icon: <FaClipboardList className="h-6 w-6" /> },
-    { title: "Change Password", link: "/layout/change-pass", icon: <FaLock className="h-6 w-6" /> },
-    { title: "Notification", link: "/layout/notifications", icon: <FaBell className="h-6 w-6" /> },
-    { title: "AI Friend", link: "/layout/friend", icon: <FaRobot className="h-6 w-6" /> },
-    { title: "Hostel", link: "/layout/hostel-dashboard", icon: <FaHome className="h-6 w-6" /> },
-    { title: "Result", link: "/layout/result", icon: <FaChartBar className="h-6 w-6" /> },
-    { title: "Logout", link: "/layout/logout", icon: <FaSignOutAlt className="h-6 w-6" /> },
-    { title: "Attendance", link: "/layout/attendance", icon: <FaClipboard className="h-6 w-6" /> },
-    { title: "Edit Profile", link: "/layout/edit-profile", icon: <FaPen className="h-6 w-6" /> },
-    { title: "Help Messages", link: "/layout/help", icon: <FaComments className="h-6 w-6" /> },
-  ];
+    {/*0 */ title: "Profile", link: "/layout", icon: <FaUserAlt className="h-6 w-6" /> },
+    {/*1 */ title: "Assignments", link: "/layout/assignment", icon: <FaClipboardList className="h-6 w-6" /> },
+    {/*2 */ title: "Change Password", link: "/layout/change-pass", icon: <FaLock className="h-6 w-6" /> },
+    {/*3 */ title: "Notification", link: "/layout/notifications", icon: <FaBell className="h-6 w-6" /> },
+    {/*4 */ title: "AI Friend", link: "/layout/friend", icon: <FaRobot className="h-6 w-6" /> },
+    {/*5 */ title: "Result", link: "/layout/result", icon: <FaChartBar className="h-6 w-6" /> },
+    {/*6 */ title: "Hostel", link: "/layout/hostel-dashboard", icon: <FaHome className="h-6 w-6" /> },
+    {/*7 */ title: "Help Messages", link: "/layout/help", icon: <FaComments className="h-6 w-6" /> },
+    {/*8 */ title: "Attendance", link: "/layout/attendance", icon: <FaClipboard className="h-6 w-6" /> },
+    {/*9 */ title: "Logout", link: "/layout/logout", icon: <FaSignOutAlt className="h-6 w-6" /> },
+  ]
 
   const username = localStorage.getItem("userName");
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +22,11 @@ const ResponsiveSidebar = () => {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   if (role === "Student") {
-    links.splice(8, 4);
+    links.splice(7, 2);
   }
 
   if (role === "Teacher") {
-    links.splice(8, 1);
+    links.splice(6, 1);
   }
 
   return (

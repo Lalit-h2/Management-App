@@ -16,7 +16,7 @@ const ClassesPage = () => {
         localStorage.setItem("attendId", attendId);
         toast.success(response.data.message);
         setTimeout(() => {
-          navigate(`attendance/${className}`);
+          navigate(`./${className}`);
         }, 2500);
       } catch (error) {
         console.error("Error fetching Attendance Sheet:", error);

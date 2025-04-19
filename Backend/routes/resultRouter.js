@@ -25,7 +25,7 @@ resultRouter.post('/post-result', authentication, async (req, res) => {
 
     const newResult = new Result({
       className: classId,
-      Marathi: Marathi,
+      marathi: Marathi,
       english: English,
       mathematics: Mathematics,
       history: History,
@@ -37,7 +37,7 @@ resultRouter.post('/post-result', authentication, async (req, res) => {
     });
 
     const result = await newResult.save();
-
+    console.log(result)
     await user.findByIdAndUpdate(studentId, { $push: { results: result._id } }, { new: true });
     return res.status(201).json({ message: "Result created successfully." });
   } catch (error) {
@@ -54,6 +54,7 @@ resultRouter.get('/get-result', authentication, async (req, res) => {
       path: 'results'
     }).sort({ createdAt: -1 }).limit(2);
 
+    console.log("\n\n",studentDetails,"\n\n\n")
     if (!studentDetails) {
       return res.status(404).json({ message: "Student not found." });
     }
