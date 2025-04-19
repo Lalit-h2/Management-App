@@ -32,23 +32,22 @@ const HostelApplicationSchema = new Schema(
       type: String,
       required: true,
     },
-    roomPreference: {
-      type: String,
-      enum: ["Single", "Double", "Triple"],
-      default: "Single",
-    },
-    medicalConditions: {
-      type: String,
-      default: "",
-    },
-    reason: {
-      type: String,
-      required: true,
-    },
     status: {
       type: String,
       enum: ["Pending", "Approved", "Rejected"],
       default: "Pending",
+    },
+    roomAssigned: {
+      type: String,
+      default: null,
+    },
+    blockAssigned: {
+      type: String,
+      default: null,
+    },
+    floorAssigned: {
+      type: Number,
+      default: null,
     },
   },
   {

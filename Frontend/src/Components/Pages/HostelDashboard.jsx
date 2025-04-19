@@ -17,16 +17,34 @@ const HostelDashboard = () => {
     rejectedApplications: 0,
   })
   const [loading, setLoading] = useState(true)
+  const [userApplication, setUserApplication] = useState(null)
   const role = localStorage.getItem("role")
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true)
+
+        // Fetch dashboard stats
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/hostel/dashboard-stats`, {
           withCredentials: true,
         })
         setStats(response.data.stats)
+
+        // If student, fetch their application status
+        if (role === "Student") {
+          try {
+            const applicationResponse = await axios.get(
+              `${import.meta.env.VITE_BACKEND_BASEURL}/api/hostel/my-application`,
+              {
+                withCredentials: true,
+              },
+            )
+            setUserApplication(applicationResponse.data.application)
+          } catch (error) {
+            console.error("Error fetching application:", error)
+          }
+        }
       } catch (error) {
         console.error("Error fetching hostel dashboard stats:", error)
       } finally {
@@ -34,8 +52,8 @@ const HostelDashboard = () => {
       }
     }
 
-    fetchStats()
-  }, [])
+    fetchData()
+  }, [role])
 
   if (loading) {
     return (
@@ -51,7 +69,7 @@ const HostelDashboard = () => {
 
       {role !== "Student" ? (
         <>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <div className="bg-white rounded-lg shadow-md p-4 flex items-center">
               <div className="bg-blue-100 p-3 rounded-full mr-4">
                 <FaBed className="text-blue-600 text-2xl" />
@@ -88,7 +106,7 @@ const HostelDashboard = () => {
                 <p className="text-2xl font-bold text-yellow-700">{stats.maintenanceRooms}</p>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div className="bg-white rounded-lg shadow-md p-4">
@@ -140,7 +158,7 @@ const HostelDashboard = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 h-40">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Link
               to="/layout/hostel-applications"
               className="bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-md p-6 text-white hover:from-blue-600 hover:to-blue-800 transition duration-300"
@@ -152,7 +170,7 @@ const HostelDashboard = () => {
               <p className="text-blue-100">Review and process student hostel applications</p>
             </Link>
 
-            {/* <Link
+            <Link
               to="/layout/hostel-rooms"
               className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-lg shadow-md p-6 text-white hover:from-purple-600 hover:to-purple-800 transition duration-300"
             >
@@ -161,7 +179,7 @@ const HostelDashboard = () => {
                 <h3 className="text-xl font-semibold">Manage Rooms</h3>
               </div>
               <p className="text-purple-100">Add, edit, and manage hostel room inventory</p>
-            </Link> */}
+            </Link>
 
             <Link
               to="/layout/hostel-payments"
@@ -189,31 +207,67 @@ const HostelDashboard = () => {
               <span className="font-medium">Amenities:</span> Study tables, Wardrobes, 24/7 hot water, Wi-Fi, Common
               room with TV, Dining hall
             </p>
-            {/* <p className="text-gray-700">
+            <p className="text-gray-700">
               <span className="font-medium">Monthly Fee Range:</span> ₹5,000 - ₹10,000 depending on room type
-            </p> */}
+            </p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-semibold text-blue-800 mb-4">Hostel Application</h3>
-            <p className="text-gray-700 mb-4">
-              To apply for hostel accommodation, please fill out the application form. Our administration will review
-              your application and notify you of the decision.
-            </p>
-            <div className="space-y-4">
-              <Link
-                to="/layout/hostel-application"
-                className="block w-full bg-blue-600 text-white text-center py-4 mt-12 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-              >
-                Apply for Hostel
-              </Link>
-              {/* <Link
-                to="/layout/hostel-rooms"
-                className="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300"
-              >
-                View Available Rooms
-              </Link> */}
-            </div>
+
+            {userApplication ? (
+              <div>
+                <div
+                  className={`p-3 mb-4 rounded-lg ${
+                    userApplication.status === "Pending"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : userApplication.status === "Approved"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  <p className="font-medium">Application Status: {userApplication.status}</p>
+                  <p>Applied on: {new Date(userApplication.createdAt).toLocaleDateString()}</p>
+                </div>
+
+                {userApplication.status === "Approved" && userApplication.roomAssigned && (
+                  <div className="bg-green-50 p-4 rounded-lg mb-4">
+                    <h4 className="font-medium text-green-800 mb-2">Room Assignment</h4>
+                    <p>Room Number: {userApplication.roomAssigned}</p>
+                    <p>Block: {userApplication.blockAssigned || "Main Block"}</p>
+                    <p>Floor: {userApplication.floorAssigned || "Ground"}</p>
+                  </div>
+                )}
+
+                <Link
+                  to="/layout/hostel-application"
+                  className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+                >
+                  View Application Details
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <p className="text-gray-700 mb-4">
+                  To apply for hostel accommodation, please fill out the application form. Our administration will
+                  review your application and notify you of the decision.
+                </p>
+                <div className="space-y-4">
+                  <Link
+                    to="/layout/hostel-application"
+                    className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+                  >
+                    Apply for Hostel
+                  </Link>
+                  <Link
+                    to="/layout/hostel-rooms"
+                    className="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300"
+                  >
+                    View Available Rooms
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 md:col-span-2">

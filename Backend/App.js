@@ -12,6 +12,7 @@ const resultRouter = require('./routes/resultRouter');
 const helpMsgRouter = require('./routes/helpMsgRouter');
 const AiRouter = require('./routes/serverRouter');
 const AdminRouter=require('./routes/adminRouter')
+const hostelRouter=require('./routes/hostelRouter')
 
 dotenv.config();
 ConnectDB();
@@ -37,7 +38,8 @@ app.use('/api', notificrouter);
 app.use('/api', AiRouter);
 app.use('/api', resultRouter);
 app.use('/api', helpMsgRouter);
-app.use('/api',AdminRouter)
+app.use('/api',AdminRouter);
+app.use('/api',hostelRouter);
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on: http://localhost:${port}`);
