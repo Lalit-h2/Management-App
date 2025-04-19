@@ -49,7 +49,7 @@ const ResponsiveSidebar = () => {
               <li key={i}>
                 <Link
                   to={item.link}
-                  className="flex items-center justify-start p-2 font-semibold md:text-xl md:font-semibold text-white hover:bg-gray-700 rounded-lg"
+                  className="flex items-center justify-start text-left p-2 font-semibold md:text-xl md:font-semibold text-white hover:bg-gray-700 rounded-lg"
                 >
                   <span className="mr-2">{item.icon}</span>
                   {item.title}
