@@ -100,6 +100,8 @@ import AdminDashboard from "./Components/Admin/AdminDashboard"
 import UserManagement from "./Components/Admin/UserManagement"
 import HostelApplications from "./Components/Admin/HostelApplications"
 import SecretAdminCreation from "./Components/Admin/SecretAdminCreation"
+import AdminHostelDashboard from "./Components/Admin/AdminHostelDashboard"
+import AdminRoomManagement from "./Components/Admin/AdminRoomManagement"
 function App() {
   return (
       <Routes>
@@ -113,8 +115,9 @@ function App() {
           <Route path="" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<UserManagement />} />
-          <Route path="hostel" element={<HostelDashboard />} />
+          <Route path="hostel" element={<AdminHostelDashboard />} />
           <Route path="applications" element={<HostelApplications />} />
+          <Route path="room-management" element={<AdminRoomManagement />} />
         </Route>
 
         <Route path="/secret/create-admin" element={<SecretAdminCreation/>}/>

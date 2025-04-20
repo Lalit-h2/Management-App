@@ -1,4 +1,5 @@
 const HostelApplication = require("../models/hostelApplication.model")
+const HostelRoom = require("../models/hostelRoom.model")
 const User = require("../models/User.model")
 
 exports.applyForHostel = async (req, res) => {
@@ -71,8 +72,7 @@ exports.getMyApplication = async (req, res) => {
 exports.updateApplicationStatus = async (req, res) => {
   try {
     const { id } = req.params
-    const { status, roomAssigned, blockAssigned, floorAssigned } = req.body
-
+    const { status, roomAssigned, blockAssigned, floorAssigned,roomRef } = req.body
     const application = await HostelApplication.findById(id)
     if (!application) {
       return res.status(404).json({
@@ -82,7 +82,7 @@ exports.updateApplicationStatus = async (req, res) => {
     }
 
     application.status = status || application.status
-
+    console.log(roomAssigned)
     if (status === "Approved" && roomAssigned) {
       application.roomAssigned = roomAssigned
       application.blockAssigned = blockAssigned || "Main Block"
@@ -90,7 +90,11 @@ exports.updateApplicationStatus = async (req, res) => {
     }
 
     await application.save()
-
+    const roomReference=await HostelRoom.findById(roomRef)
+    if (status === "Approved" && roomAssigned) {
+    roomReference.occupants.push(application.studentId)
+    }
+    await  roomReference.save()
     return res.status(200).json({
       success: true,
       message: "Application status updated successfully",

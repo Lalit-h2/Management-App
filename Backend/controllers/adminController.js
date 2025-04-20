@@ -64,11 +64,9 @@ exports.getDashboardStats = async (req, res) => {
     const totalTeachers = await User.countDocuments({ role: "Teacher" })
     const pendingApplications = await HostelApplication.countDocuments({ status: "Pending" })
     const totalRooms = await Room.countDocuments()
-    const availableRooms = await Room.countDocuments({ status: "Available" })
-    const occupiedRooms = await Room.countDocuments({ status: "Occupied" })
-    const maintenanceRooms = await Room.countDocuments({ status: "Maintenance" })
+    const availableRooms = await Room.countDocuments({ isAvailable:true })
+    const occupiedRooms = await Room.countDocuments({ isAvailable:false })
 
-    // Get application stats
     const totalApplications = await HostelApplication.countDocuments()
     const approvedApplications = await HostelApplication.countDocuments({ status: "Approved" })
     const rejectedApplications = await HostelApplication.countDocuments({ status: "Rejected" })
@@ -82,7 +80,7 @@ exports.getDashboardStats = async (req, res) => {
         totalRooms,
         availableRooms,
         occupiedRooms,
-        maintenanceRooms,
+       
         totalApplications,
         pendingApplications,
         approvedApplications,

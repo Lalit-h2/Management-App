@@ -194,12 +194,7 @@ const HostelApplication = () => {
                 <p className="text-green-700">
                   <span className="font-semibold">Room Number:</span> {application.roomAssigned}
                 </p>
-                <p className="text-green-700">
-                  <span className="font-semibold">Block:</span> {application.blockAssigned || "Main Block"}
-                </p>
-                <p className="text-green-700">
-                  <span className="font-semibold">Floor:</span> {application.floorAssigned || "Ground Floor"}
-                </p>
+              
               </div>
             )}
 

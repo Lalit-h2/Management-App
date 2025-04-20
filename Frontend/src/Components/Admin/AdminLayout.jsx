@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const AdminLayout = () => {
   const [adminName, setAdminName] = useState("")
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState((localStorage.getItem("role")==="Admin"))
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
   useEffect(() => {

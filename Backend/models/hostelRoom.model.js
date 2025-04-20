@@ -8,28 +8,14 @@ const HostelRoomSchema = new Schema(
       required: true,
       unique: true,
     },
-    roomType: {
-      type: String,
-      enum: ["Single", "Double", "Triple", "Dormitory"],
-      default: "Single",
-    },
     capacity: {
       type: Number,
       required: true,
       min: 1,
     },
-    floor: {
-      type: Number,
-      required: true,
-    },
-    block: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["Available", "Occupied", "Maintenance"],
-      default: "Available",
+    isAvailable: {
+      type: Boolean,
+      default: true,
     },
     occupants: [
       {
@@ -37,19 +23,22 @@ const HostelRoomSchema = new Schema(
         ref: "User",
       },
     ],
-    amenities: {
-      type: String,
-      default: "",
-    },
-    monthlyFee: {
-      type: Number,
-      required: true,
-    },
   },
   {
     timestamps: true,
   },
 )
+
+HostelRoomSchema.virtual("isFull").get(function () {
+  return this.occupants.length >= this.capacity
+})
+
+HostelRoomSchema.pre("save", function (next) {
+  if (this.occupants.length >= this.capacity) {
+    this.isAvailable = false
+  }
+  next()
+})
 
 const HostelRoom = mongoose.model("HostelRoom", HostelRoomSchema)
 module.exports = HostelRoom
