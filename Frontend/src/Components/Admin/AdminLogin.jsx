@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { changeRole, logIn } from "../../Store/auth"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 const AdminLogin = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -84,12 +87,12 @@ const AdminLogin = () => {
               placeholder="Enter admin username"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <label htmlFor="password" className="text-zinc-400 block mb-2">
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={formData.password}
@@ -97,6 +100,13 @@ const AdminLogin = () => {
               className="w-full p-3 text-zinc-900 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
               placeholder="Enter your password"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-5 top-11 text-zinc-500"
+            >
+              {showPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
+            </button>
           </div>
           <button
             type="submit"
