@@ -102,12 +102,14 @@ import HostelApplications from "./Components/Admin/HostelApplications"
 import SecretAdminCreation from "./Components/Admin/SecretAdminCreation"
 import AdminHostelDashboard from "./Components/Admin/AdminHostelDashboard"
 import AdminRoomManagement from "./Components/Admin/AdminRoomManagement"
+import DonationPage from "./Components/Donation/Donation"
 function App() {
   return (
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/teacherlogin" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/donate" element={<DonationPage />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/signUp" element={<SignUp />} />
 

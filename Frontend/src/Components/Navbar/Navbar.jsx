@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { FaSchool, FaUserGraduate, FaChalkboardTeacher, FaUserShield, FaHeadset } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { FaSchool, FaUserGraduate, FaChalkboardTeacher, FaUserShield, FaHeadset, FaHeart } from "react-icons/fa"
+import { Link, useNavigate } from "react-router-dom"
 import { HelpMsg } from '../Pages/HelpMsg';
 
 
 export const Navbar = ({setIsHome}) => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+const navigate=useNavigate('')
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date())
@@ -63,15 +63,32 @@ export const Navbar = ({setIsHome}) => {
               <span className="group-hover:text-pink-300 transition-colors duration-200">Admin</span>
             </Link>
 
-            <Link onClick={() => { setIsHome(false) }} className="nav-link group" >
+            <Link
+              onClick={() => {
+                setIsHome(false)
+              }}
+              className="nav-link group"
+            >
               <FaHeadset className="text-xl text-blue-400 group-hover:text-blue-300 mr-2 inline-block" />
               <span className="group-hover:text-blue-300 transition-colors duration-200">Help</span>
             </Link>
           </div>
 
-          <div className="hidden md:block text-right text-lg font-medium">
-            <div>{currentTime.toLocaleDateString()}</div>
-            <div>{currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+          <div className="hidden md:flex items-center space-x-4">
+              <button
+              className="flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full text-white font-medium shadow-lg hover:shadow-pink-500/30 transition-all duration-300 group"
+              onClick={() => {
+                navigate("/donate")
+              }}
+            >
+              <FaHeart className="mr-2 group-hover:animate-pulse" />
+              <span>Donate</span>
+            </button>
+
+            <div className="text-right text-lg font-medium">
+              <div>{currentTime.toLocaleDateString()}</div>
+              <div>{currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,12 +121,24 @@ export const Navbar = ({setIsHome}) => {
             </Link>
 
             <Link
-              onClick={() => { setIsHome(false) }}  
+              onClick={() => {
+                setIsHome(false)
+              }}
               className="flex items-center py-2 px-4 rounded-md hover:bg-slate-800 transition-colors duration-200"
             >
               <FaHeadset className="text-xl text-blue-400 mr-3" />
               <span>Help Desk</span>
             </Link>
+
+            <button
+              className="flex items-center py-2 px-4 rounded-md bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-blue-600 hover:to-indigo-700 transition-colors duration-200"
+              onClick={() => {
+                navigate("/donate")
+              }}
+            >
+              <FaHeart className="text-xl text-white mr-3 animate-pulse" />
+              <span>Donate Now</span>
+            </button>
 
             <div className="text-sm text-zinc-400 pt-2 border-t border-zinc-700">
               {currentTime.toLocaleDateString()} |{" "}
@@ -118,6 +147,5 @@ export const Navbar = ({setIsHome}) => {
           </div>
         </div>
       )}
-    </div>
-  )
+    </div>)
 }
