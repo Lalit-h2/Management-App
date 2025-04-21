@@ -1,4 +1,5 @@
 const Admin = require("../models/admin.model")
+const Class = require('../models/class.model');
 const User =require("../models/User.model")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -144,7 +145,6 @@ exports.getUsersByRole = async (req, res) => {
     }
 
     const users = await User.find({ role }).select("-password")
-
     return res.status(200).json({
       success: true,
       users,
@@ -188,7 +188,7 @@ exports.deleteUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, email, password, address, mobileNo } = req.body
+    const { name, email, password, address, mobileNo ,className} = req.body
 
     const user = await User.findById(id)
     if (!user) {
@@ -198,10 +198,22 @@ exports.updateUser = async (req, res) => {
       })
     }
 
+    let classId = null;
 
+    if (className) {
+      let existingClass = await Class.findOne({ name: className });
+      if (!existingClass) {
+        const newClass = new Class({ name: className });
+        const savedClass = await newClass.save();
+        classId = savedClass._id;
+      } else {
+        classId = existingClass._id;
+      }
+    }
+    // console.log('\n\n\n ',classNameob,'\n\n\n')
     user.name = name || user.name
     user.email = email || user.email
-    // user.className = className || user.className
+     user.className = classId || user.className
     user.address = address || user.address
     user.mobileNo = mobileNo || user.mobileNo
 

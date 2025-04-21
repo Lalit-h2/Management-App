@@ -141,7 +141,6 @@ const UserManagement = () => {
       <Toaster />
       <h1 className="text-3xl font-bold text-gray-800 mb-6">User Management</h1>
 
-      {/* Tabs */}
       <div className="flex border-b border-gray-200 mb-6">
         <button
           className={`py-2 px-4 font-medium text-sm focus:outline-none ${
@@ -163,7 +162,6 @@ const UserManagement = () => {
         </button>
       </div>
 
-      {/* Search and Add User */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <div className="relative w-full md:w-64 mb-4 md:mb-0">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -190,7 +188,6 @@ const UserManagement = () => {
         </button>
       </div>
 
-      {/* Users Table */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -260,7 +257,6 @@ const UserManagement = () => {
         </div>
       )}
 
-      {/* Create User Modal */}
       {showCreateForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
@@ -394,7 +390,6 @@ const UserManagement = () => {
         </div>
       )}
 
-      {/* Edit User Modal */}
       {showEditForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
