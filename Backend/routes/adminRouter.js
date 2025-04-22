@@ -12,6 +12,8 @@ router.post("/create-admin", adminController.createAdmin)
 
 router.get('/users-by-role/:role',adminController.getUsersByRole)
 
+router.post("/create-user", verifyToken, isAdmin, adminController.createUser)
+
 router.delete("/delete-user/:id", verifyToken, isAdmin, adminController.deleteUser)
 
 router.put("/update-user/:id", verifyToken, isAdmin, adminController.updateUser)

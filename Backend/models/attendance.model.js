@@ -14,7 +14,7 @@ const attendanceSchema = mongoose.Schema({
   records: [
     {
       student: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'user',
       },
       status: {

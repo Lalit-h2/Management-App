@@ -319,7 +319,7 @@ const UserManagement = () => {
                   <option value="Teacher">Teacher</option>
                 </select>
               </div>
-              {formData.role === "Student" && (
+              {(formData.role === "Student" || formData.role === "Teacher") && (
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="className">
                     Class
@@ -436,7 +436,7 @@ const UserManagement = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              {formData.role === "Student" && (
+              {formData.role  && (
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edit-className">
                     Class

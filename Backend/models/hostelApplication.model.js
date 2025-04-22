@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const HostelApplicationSchema = new Schema(
   {
     studentId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
