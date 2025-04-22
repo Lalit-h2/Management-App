@@ -64,7 +64,8 @@ const HostelDashboard = () => {
   }
 
   return (
-    <div className="p-6 bg-[url(https://wallpaperaccess.com/full/1685406.jpg)] min-h-screen mt-0 md:mt-16">
+    <div className="p-6 bg-gradient-to-br from-blue-700 to-indigo-800
+ min-h-screen mt-0 md:mt-16 rounded-xl">
       <h2 className="text-3xl font-bold text-white mb-6">Student Hostel Dashboard</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

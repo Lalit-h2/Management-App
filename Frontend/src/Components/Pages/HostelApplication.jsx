@@ -20,21 +20,18 @@ const HostelApplication = () => {
   })
 
   useEffect(() => {
-    // Only students should access this page
     if (role !== "Student") {
       return
     }
 
     const fetchUserData = async () => {
       try {
-        // Fetch user details to pre-fill the form
         const userResponse = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/user-details`, {
           withCredentials: true,
         })
 
         setUserData(userResponse.data)
 
-        // Pre-fill form with user data
         setFormData({
           fullName: userResponse.data.name || "",
           parentName: "",
@@ -43,7 +40,6 @@ const HostelApplication = () => {
           emergencyContact: "",
         })
 
-        // Check if user has already applied
         const applicationResponse = await axios.get(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/hostel/my-application`,
           {
@@ -115,7 +111,6 @@ const HostelApplication = () => {
     )
   }
 
-  // Only students can access this page
   if (role !== "Student") {
     return (
       <div className="min-h-screen bg-blue-50 flex items-center justify-center">
@@ -127,7 +122,7 @@ const HostelApplication = () => {
   return (
     <>
       <Toaster />
-      <div className="p-6 bg-[url(https://wallpaperaccess.com/full/1685406.jpg)] min-h-screen mt-0 md:mt-16">
+      <div className="p-6 bg-gradient-to-br from-blue-700 to-indigo-800 rounded-lg min-h-screen mt-0 md:mt-16">
         <h2 className="text-3xl font-bold text-white mb-6">Hostel Application</h2>
 
         {userHasApplied && application ? (

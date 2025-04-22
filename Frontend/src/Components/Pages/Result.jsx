@@ -1,4 +1,3 @@
-"use client"
 
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -100,7 +99,7 @@ const AddResult = () => {
   return (
     <>
       <Toaster position="top-right" />
-      <div className="min-h-screen mt-12 bg-gradient-to-b from-sky-50 to-white py-8 px-4 md:py-12">
+      <div className="min-h-screen mt-2 bg-transparent px-4 md:py-12">
         {isTeacher ? (
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-xl shadow-xl overflow-hidden">

@@ -1,134 +1,209 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import toast, { Toaster } from "react-hot-toast";
+import axios from "axios"
+import { useState } from "react"
+import toast, { Toaster } from "react-hot-toast"
+import { FaLock, FaEnvelope, FaKey, FaShieldAlt } from "react-icons/fa"
 
 export const ChangePass = () => {
-  const [Isotp, setIsotp] = useState(false);
+  const [isOtp, setIsOtp] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     password: "",
     email: "",
     otp: "",
-    newPass: ""
-  });
+    newPass: "",
+  })
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({
       ...formData,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const userId = localStorage.getItem("userId")
+
   const handlePassword = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    if (!formData.email) {
+      toast.error("Please enter your email address")
+      return
+    }
+
+    toast.loading("Sending OTP...")
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/get-otp`, {
         email: formData.email,
-        userId: userId
-      });
-      toast.success(response.data.message);
-      setIsotp(true);
+        userId: userId,
+      })
+      toast.dismiss()
+      toast.success(response.data.message)
+      setIsOtp(true)
     } catch (error) {
-      console.error("Error Response:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Failed to send email");
+      toast.dismiss()
+      console.error("Error Response:", error.response?.data || error.message)
+      toast.error(error.response?.data?.message || "Failed to send email")
     }
-  };
+  }
 
   const handleOtp = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!formData.otp || !formData.newPass) {
-      toast.error("Please fill out both fields.");
-      return;
+      toast.error("Please fill out both fields.")
+      return
     }
+
+    toast.loading("Verifying OTP...")
     try {
       const response = await axios.put(`${import.meta.env.VITE_BACKEND_BASEURL}/api/forgot-password`, {
         email: formData.email,
         otp: formData.otp,
         newPass: formData.newPass,
-      });
-      toast.success(response.data.message);
-      setIsotp(false);
+      })
+      toast.dismiss()
+      toast.success(response.data.message)
+      setIsOtp(false)
+      setFormData({
+        name: "",
+        password: "",
+        email: "",
+        otp: "",
+        newPass: "",
+      })
     } catch (error) {
-      console.error("Error Response:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "OTP verification failed");
+      toast.dismiss()
+      console.error("Error Response:", error.response?.data || error.message)
+      toast.error(error.response?.data?.message || "OTP verification failed")
     }
-  };
-  return (
-    <div className="bg-[url(https://th.bing.com/th/id/R.fe14369a0eff333030ca1fc9725342b2?rik=5vlKtZwATE0%2fWQ&riu=http%3a%2f%2f3.bp.blogspot.com%2f-O1zZtHtvvvk%2fVdzpBHIvRuI%2fAAAAAAAACNA%2fFoJhfx6qWVs%2fs1600%2f18445879194_35b35c2820_k.jpg&ehk=7qHKWU2gOTwGwPfZybPYOs%2fM63YYSJo8zdx%2bQyfXc4s%3d&risl=&pid=ImgRaw&r=0)] bg-cover bg-center h-screen flex items-center justify-center">
-      <Toaster />
-      <div className={`${Isotp ? "hidden" : "bg-inherit"} p-8 rounded-lg w-80 md:w-96 shadow-lg`}>
-        <h2 className="text-2xl font-semibold text-white text-center mb-6">
-          Enter your email
-        </h2>
-        <form onSubmit={handlePassword}>
-          <div className="mb-4">
-            <label htmlFor="email" className="text-zinc-400 block mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 text-zinc-900 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
-              placeholder="Enter your registered email"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300"
-          >
-            Get otp
-          </button>
-        </form>
-      </div>
-      {Isotp && (
-        <div className="bg-zinc-800 p-8 rounded-lg w-80 md:w-96 shadow-lg">
-          <h2 className="text-2xl font-semibold text-white text-center mb-6">
-            Reset Your Password
-          </h2>
-          <form onSubmit={handleOtp}>
-            <div className="mb-4">
-              <label htmlFor="otp" className="text-zinc-400 block mb-2">
-                OTP
-              </label>
-              <input
-                type="text"
-                id="otp"
-                name="otp"
-                value={formData.otp}
-                onChange={handleChange}
-                className="w-full p-3 text-zinc-900 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                placeholder="Enter the OTP"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="newPass" className="text-zinc-400 block mb-2">
-                New Password
-              </label>
-              <input
-                type="password"
-                id="newPass"
-                name="newPass"
-                value={formData.newPass}
-                onChange={handleChange}
-                className="w-full p-3 text-zinc-900 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                placeholder="Enter your new password"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      )}
-    </div>
+  }
 
+  return (
+    <div className="min-h-screen bg-indigo-200/50 rounded-2xl bg-cover bg-center flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Toaster />
+
+      <div className="max-w-md w-full bg-white bg-opacity-95 rounded-xl shadow-2xl overflow-hidden">
+        <div className="p-6 sm:p-8">
+          {!isOtp ? (
+            <>
+              <div className="flex justify-center mb-6">
+                <div className="h-16 w-16 rounded-full bg-indigo-600 flex items-center justify-center">
+                  <FaEnvelope className="h-8 w-8 text-white" />
+                </div>
+              </div>
+
+              <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Reset Password</h2>
+
+              <p className="text-gray-600 text-center mb-6">
+                Enter your email address and we'll send you an OTP to reset your password.
+              </p>
+
+              <form onSubmit={handlePassword} className="space-y-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaEnvelope className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="pl-10 w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-400"
+                      placeholder="Enter your registered email"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white"
+                >
+                  Send OTP
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <div className="flex justify-center mb-6">
+                <div className="h-16 w-16 rounded-full bg-indigo-600 flex items-center justify-center">
+                  <FaShieldAlt className="h-8 w-8 text-white" />
+                </div>
+              </div>
+
+              <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Verify OTP</h2>
+
+              <p className="text-gray-600 text-center mb-6">Enter the OTP sent to your email and your new password.</p>
+
+              <form onSubmit={handleOtp} className="space-y-6">
+                <div>
+                  <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-1">
+                    OTP Code
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaKey className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      id="otp"
+                      name="otp"
+                      value={formData.otp}
+                      onChange={handleChange}
+                      className="pl-10 w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-400"
+                      placeholder="Enter the OTP"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="newPass" className="block text-sm font-medium text-gray-700 mb-1">
+                    New Password
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaLock className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="password"
+                      id="newPass"
+                      name="newPass"
+                      value={formData.newPass}
+                      onChange={handleChange}
+                      className="pl-10 w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 placeholder-gray-400"
+                      placeholder="Enter your new password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setIsOtp(false)}
+                    className="text-indigo-600 hover:text-indigo-500 transition-colors"
+                  >
+                    Back to Email
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white"
+                  >
+                    Reset Password
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
