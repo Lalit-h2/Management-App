@@ -22,16 +22,14 @@ const navigate=useNavigate('')
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center space-x-3 group cursor-pointer">
             <div className="relative">
-              <FaSchool className="text-4xl text-indigo-500 group-hover:animate-spin transition-all duration-300" />
+              <FaSchool className="text-4xl text-indigo-500  transition-all duration-300" />
               <div className="absolute -inset-1 bg-indigo-500 rounded-full blur-md opacity-30 hidden group-hover:block"></div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-semibold group-hover:text-indigo-500 transition-colors duration-300">
-                School Management System
+              <span className="text-md font-semibold group-hover:text-indigo-500 transition-colors duration-300">
+              Pimpri Chinchwad Apang Vidyalaya School Management 
               </span>
-              <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors duration-300">
-                Manage your school efficiently
-              </span>
+            
             </div>
           </div>
 

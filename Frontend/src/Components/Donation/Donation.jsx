@@ -7,7 +7,7 @@ import ChildrenImage from "/NGO_Students.jpg"
 //     <div className="min-h-screen bg-gradient-to-br from-zinc-800 via-slate-800 to-zinc-900 text-white">
 //       <header className="bg-slate-900 py-4 px-6 shadow-md">
 //         <div className="container mx-auto flex justify-between items-center">
-//           <h1 className="text-xl md:text-2xl font-bold">Pimpri Chinchwad Apang Mitra Mandal</h1>
+//           <h1 className="text-xl md:text-2xl font-bold">Pimpri Chinchwad Apang Vidyalaya</h1>
 //           <nav>
 //             <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 flex items-center gap-2">
 //               <FaHeart /> Donate Now
@@ -133,7 +133,7 @@ export default function DonationPage() {
         <button className="bg-gray-200 text-indigo-600 hover:text-indigo-700 rounded-full   p-2.5 font-semibold flex items-center gap-2" onClick={()=>{navigate('/')}}>
       <FaAngleLeft size={28} /> 
     </button>
-          <h1 className="text-xl md:text-2xl font-bold ">Pimpri Chinchwad Apang Mitra Mandal</h1>
+          <h1 className="text-xl md:text-2xl font-bold ">Pimpri Chinchwad Apang Vidyalaya</h1>
           <nav>
             <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 flex items-center gap-2">
               <FaHeart /> Donate Now

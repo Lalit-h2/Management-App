@@ -63,7 +63,7 @@ export const Home = () => {
       <div className="pt-24 bg-gradient-to-br from-zinc-800 via-slate-800 to-zinc-900 min-h-screen">
         {IsHome ? (
           <>
-            <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-xl h-[50vh] md:h-[70vh]">
+            <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-lg shadow-xl h-[60vh] md:h-[80vh] px-5">
               <div className="relative h-full">
                 {slides.map((slide, index) => (
                   <div
@@ -79,7 +79,6 @@ export const Home = () => {
                     />
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-60 text-white">
                       <h2 className="text-xl md:text-2xl font-bold">
-                        {slide.caption}
                       </h2>
                     </div>
                   </div>

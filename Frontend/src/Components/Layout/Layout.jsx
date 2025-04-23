@@ -32,7 +32,7 @@ export const Layout = () => {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
                 <FaSchool className="h-8 w-8 text-indigo-400" />
-                <span className="ml-2 text-xl font-bold text-white">School Management System</span>
+                <span className="ml-2 text-lg font-bold text-white">Pimpri Chinchwad Apang Vidyalaya </span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
