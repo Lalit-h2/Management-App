@@ -6,7 +6,7 @@ const classSchema = mongoose.Schema({
     require: true
   },
   student: [{
-    type: mongoose.Schema.ObjectId,
+    type: String,
     ref: 'user'
   }],
   assignment: [{

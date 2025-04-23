@@ -150,11 +150,12 @@ export const Profile = () => {
                   <div className="flex-shrink-0 h-10 w-10 rounded-md bg-indigo-100 flex items-center justify-center">
                     <FaUser className="h-5 w-5 text-indigo-600" />
                   </div>
-                  <div className="ml-4">
-                    <p className="text-sm text-gray-500">Full Name</p>
-                    <p className="text-lg text-gray-800">{userData.name || "N/A"}</p>
+                  <div className="ml-4"><p className="text-sm text-gray-500">{userData.role+" ID"} </p>
+                    <p className="text-lg text-gray-800">{userData._id || "N/A"}</p>
+               
                   </div>
                 </div>
+               
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0 h-10 w-10 rounded-md bg-indigo-100 flex items-center justify-center">

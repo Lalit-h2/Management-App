@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { FaUserPlus, FaEdit, FaTrash, FaSearch, FaUserGraduate, FaChalkboardTeacher } from "react-icons/fa"
@@ -319,7 +317,7 @@ const UserManagement = () => {
                   <option value="Teacher">Teacher</option>
                 </select>
               </div>
-              {formData.role === "Student" && (
+              {(formData.role === "Student" || formData.role === "Teacher") && (
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="className">
                     Class
@@ -333,12 +331,11 @@ const UserManagement = () => {
                     required
                   >
                     <option value="">Select Class</option>
-                    <option value="Five">Five</option>
-                    <option value="Six">Six</option>
-                    <option value="Seven">Seven</option>
-                    <option value="Eight">Eight</option>
-                    <option value="Nine">Nine</option>
-                    <option value="Ten">Ten</option>
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="Four">Four</option>
+                    
                   </select>
                 </div>
               )}
@@ -436,7 +433,7 @@ const UserManagement = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              {formData.role === "Student" && (
+              {formData.role  && (
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edit-className">
                     Class
@@ -450,12 +447,11 @@ const UserManagement = () => {
                     required
                   >
                     <option value="">Select Class</option>
-                    <option value="Five">Five</option>
-                    <option value="Six">Six</option>
-                    <option value="Seven">Seven</option>
-                    <option value="Eight">Eight</option>
-                    <option value="Nine">Nine</option>
-                    <option value="Ten">Ten</option>
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="Four">Four</option>
+                    
                   </select>
                 </div>
               )}

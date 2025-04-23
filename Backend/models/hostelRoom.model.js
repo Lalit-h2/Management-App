@@ -19,7 +19,7 @@ const HostelRoomSchema = new Schema(
     },
     occupants: [
       {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
       },
     ],

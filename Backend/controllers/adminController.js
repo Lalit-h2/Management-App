@@ -145,9 +145,17 @@ exports.getUsersByRole = async (req, res) => {
     }
 
     const users = await User.find({ role }).select("-password")
+    const updatedUsers = await Promise.all(users.map(async (user) => {
+      const classDoc = await Class.findById(user.className);
+      const userObj = user.toObject();
+      userObj.className = classDoc?.name || null;
+      return userObj;
+    }));
+    console.log(updatedUsers)
+    console.log("\n\n",users)
     return res.status(200).json({
       success: true,
-      users,
+      users:updatedUsers,
     })
   } catch (error) {
     console.error("Error fetching users by role:", error)
@@ -233,6 +241,75 @@ exports.updateUser = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Server error while updating user",
+    })
+  }
+}
+
+exports.createUser = async (req, res) => {
+  try {
+    const { name, email, password, role, className, address, mobileNo } = req.body
+
+    const existingUser = await User.findOne({ email })
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists",
+      })
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    let prefixID=""
+    if (role==="Student"){
+      prefixID="ST" + (new Date().getFullYear()%100) +className
+    }
+    else{
+      prefixID="TH" + (new Date().getFullYear()%100)+className
+    }
+    let generatedId
+    const lastrecord=await User.findOne({role:role}).sort({createdAt:-1})
+    if(lastrecord){
+      console.log((parseInt((lastrecord._id).slice(-4))+1))
+      generatedId=prefixID+(parseInt((lastrecord._id).slice(-4))+1)
+    }
+    else{
+      generatedId=prefixID+"1000"
+  }
+
+  let classId = null;
+
+    if (className) {
+      let existingClass = await Class.findOne({ name: className });
+      if (!existingClass) {
+        const newClass = new Class({ name: className });
+        const savedClass = await newClass.save();
+        classId = savedClass._id;
+      } else {
+        classId = existingClass._id;
+      }
+    }
+    const newUser = new User({
+      _id:generatedId,
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      className:classId,
+      address,
+      mobileNo,
+    })
+
+    await newUser.save()
+
+    return res.status(201).json({
+      success: true,
+      message: `${role} account created successfully`,
+      userId: newUser._id,
+    })
+  } catch (error) {
+    console.error("Error creating user:", error)
+    return res.status(500).json({
+      success: false,
+      message: "Server error while creating user",
     })
   }
 }

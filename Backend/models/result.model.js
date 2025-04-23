@@ -53,7 +53,7 @@ const resultSchema = new mongoose.Schema({
     default: 0,
   },
   student: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "user",
     required: true,
   },
