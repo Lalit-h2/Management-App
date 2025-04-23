@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Sidebar from "./Sidebar"
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { FaSchool, FaBell, FaUserCircle } from "react-icons/fa"
 import UnauthorizedPage from "../Pages/UnauthorizedPage"
 
@@ -9,7 +9,7 @@ export const Layout = () => {
   const [userRole, setUserRole] = useState("")
   const [isLogged, setIsLogged] = useState(false)
   const [notificationCount, setNotificationCount] = useState(3)
-
+  const navigate=useNavigate()
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName")
     const storedUserRole = localStorage.getItem("role")
@@ -37,12 +37,8 @@ export const Layout = () => {
             </div>
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <FaBell className="h-6 w-6 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                {notificationCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    {notificationCount}
-                  </span>
-                )}
+                <FaBell className="h-6 w-6 text-gray-300 hover:text-white cursor-pointer transition-colors" onClick={()=>{navigate('./notifications')}} />
+                
               </div>
 
               <div className="flex items-center space-x-3">

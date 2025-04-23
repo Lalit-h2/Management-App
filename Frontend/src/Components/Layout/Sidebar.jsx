@@ -14,17 +14,19 @@ import {
   FaBars,
   FaTimes,
   FaChevronRight,
+  FaUserGraduate,
 } from "react-icons/fa"
 const Sidebar = () => {
   const allLinks = [
     { title: "Profile", link: "/layout", icon: <FaUserAlt className="h-5 w-5" /> },
     { title: "Assignments", link: "/layout/assignment", icon: <FaClipboardList className="h-5 w-5" /> },
     { title: "Change Password", link: "/layout/change-pass", icon: <FaLock className="h-5 w-5" /> },
-    { title: "Notification", link: "/layout/notifications", icon: <FaBell className="h-5 w-5" />, badge: 3 },
+    { title: "Notification", link: "/layout/notifications", icon: <FaBell className="h-5 w-5" /> },
     { title: "AI Friend", link: "/layout/friend", icon: <FaRobot className="h-5 w-5" /> },
     { title: "Result", link: "/layout/result", icon: <FaChartBar className="h-5 w-5" /> },
     { title: "Hostel", link: "/layout/hostel-dashboard", icon: <FaHome className="h-5 w-5" /> },
     { title: "Help Messages", link: "/layout/help", icon: <FaComments className="h-5 w-5" /> },
+    { title: "View Students", link: "/layout/liststudents", icon: <FaUserGraduate className="h-5 w-5" /> },
     { title: "Attendance", link: "/layout/attendance", icon: <FaClipboard className="h-5 w-5" /> },
     { title: "Logout", link: "/layout/logout", icon: <FaSignOutAlt className="h-5 w-5" /> },
   ]
@@ -37,7 +39,7 @@ const Sidebar = () => {
   const toggleSidebar = () => setIsOpen(!isOpen)
 
   const filteredLinks = allLinks.filter((_, index) => {
-    if (role === "Student") return ![7, 8].includes(index) 
+    if (role === "Student") return ![7, 8,9].includes(index) 
     if (role === "Teacher") return ![6].includes(index) 
     return true
   })

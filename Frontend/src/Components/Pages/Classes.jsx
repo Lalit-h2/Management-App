@@ -23,7 +23,7 @@ const ClassesPage = () => {
         }, 2500)
       } catch (error) {
         console.error("Error fetching Attendance Sheet:", error)
-        toast.error("Failed to load")
+        toast.error(error.response.data.message)
       }
     }
     fetchAttendanceSheet()
@@ -40,7 +40,7 @@ const ClassesPage = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {["Five", "Six", "Seven", "Eight", "Nine", "Ten"].map((className) => (
+            {["One","Two","Three","Four",].map((className) => (
               <div
                 key={className}
                 onClick={() => handleClassClick(className)}

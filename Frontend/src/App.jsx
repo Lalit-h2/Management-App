@@ -103,6 +103,7 @@ import SecretAdminCreation from "./Components/Admin/SecretAdminCreation"
 import AdminHostelDashboard from "./Components/Admin/AdminHostelDashboard"
 import AdminRoomManagement from "./Components/Admin/AdminRoomManagement"
 import DonationPage from "./Components/Donation/Donation"
+import Students from "./Components/Pages/ListStudents"
 function App() {
   return (
       <Routes>
@@ -130,6 +131,7 @@ function App() {
           <Route path="change-pass" element={<ChangePass />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="friend" element={<AIChat />} />
+          <Route path="liststudents" element={<Students />} />
           <Route path="result" element={<AddResult />} />
           <Route path="attendance" element={<ClassesPage />} />
           <Route path="attendance/:className" element={<AttendancePage />} />
