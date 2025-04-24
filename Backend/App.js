@@ -20,12 +20,8 @@ ConnectDB();
 const app = express();
 
 app.use(cookieParser());
-app.use(cors({
-  origin: function (origin, callback) {
-    callback(null, origin); // reflect the requesting origin
-  },
-  credentials: true
-}));
+app.use(cors({origin:true,credentials:true,allowedHeaders:false}))
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
