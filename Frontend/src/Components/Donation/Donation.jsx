@@ -1,6 +1,7 @@
 import { FaHeart, FaHandHoldingHeart, FaHandsHelping, FaQrcode, FaChild, FaArrowLeft, FaAngleLeft } from "react-icons/fa"
 import {Footer} from "../Footer/HomeFooter"
 import { useNavigate } from "react-router-dom"
+import DonationQr from "../../assets/donationQr.jpg"
 import ChildrenImage from "/NGO_Students.jpg"
 // export default function DonationPage() {
 //   return (
@@ -198,13 +199,13 @@ export default function DonationPage() {
             </div>
 
             <div className="md:w-1/2 flex flex-col items-center">
-              <div className="bg-gray-100 p-4 rounded-lg shadow-lg border-2 border-gray-300 mb-4">
-                <div className="bg-white p-8 rounded-lg flex flex-col items-center">
-                  <FaQrcode className="text-9xl text-indigo-500 mb-4" />
-                  <p className="text-sm text-gray-600 text-center">Scan to donate directly</p>
+              <div className="bg-gray-100 p-3 rounded-lg shadow-lg border-2 border-gray-300 mb-4">
+                <div className="bg-white p-6 rounded-lg flex flex-col items-center">
+                  <img src={DonationQr} className="text-9xl text-indigo-500 mb-2 h-40 w-40" />
+                  {/* <p className="text-sm text-gray-600 text-center">Scan to donate directly</p> */}
                 </div>
               </div>
-              <p className="text-center text-gray-700 font-medium">Scan the QR code to make a direct payment</p>
+              <p className="text-center text-gray-700 font-medium">Scan the QR code to make a direct donation</p>
             </div>
           </div>
         </section>
