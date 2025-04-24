@@ -40,6 +40,9 @@ app.use('/api', resultRouter);
 app.use('/api', helpMsgRouter);
 app.use('/api',AdminRouter);
 app.use('/api',hostelRouter);
+app.get('/api/test',(req,res)=>{
+  res.json({message:"test success"})
+})
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on: http://localhost:${port}`);
